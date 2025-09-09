@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS medhub - Priority AI Health Models</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary: #ff6f00;
+            --secondary-light: #ff9100;
+            --secondary-dark: #e65100;
+            --text-dark: #263238;
+            --text-light: #78909c;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            --gradient-overlay: linear-gradient(135deg, rgba(46, 125, 50, 0.85), rgba(255, 111, 0, 0.85));
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.16);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--background);
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header.scrolled {
+            padding: 0.75rem 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section with Video Background */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            padding: 0 1rem;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-overlay);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            background: linear-gradient(to bottom, var(--background), #ffffff);
+            min-height: 100vh;
+            padding: 5rem 0;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Model Cards Grid */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .model-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .model-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .model-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .model-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.25rem;
+            color: white;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.25);
+        }
+
+        .model-card:hover .model-icon {
+            transform: scale(1.1);
+            background: var(--gradient-secondary);
+        }
+
+        .model-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .model-description {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .model-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 111, 0, 0.3);
+        }
+
+        /* About Section */
+        .about-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease-in-out;
+            margin-top: 1.25rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .about-section.active {
+            max-height: 500px;
+            padding: 1.5rem;
+            background: rgba(236, 239, 241, 0.5);
+            border: 1px solid rgba(176, 190, 197, 0.3);
+        }
+
+        .about-content {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .about-content h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Catalog Section */
+        .catalog-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .catalog-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+
+        .catalog-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .catalog-title {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .catalog-btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+
+        .catalog-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Model Viewer */
+        .model-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .model-viewer.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .viewer-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.25rem 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2001;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-btn:hover {
+            background: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        .model-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding-top: 80px;
+        }
+
+        /* Loading animation */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2002;
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .loader.active {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Flagship Model Styling */
+        .flagship-model {
+            grid-column: 1 / -1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2.5rem;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+            animation: pulse 3s infinite;
+        }
+
+        .flagship-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(255, 111, 0, 0.3);
+            z-index: 10;
+        }
+
+        .flagship-model .model-icon {
+            width: 100px;
+            height: 100px;
+            font-size: 2.75rem;
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.35);
+        }
+
+        .flagship-model .model-title {
+            font-size: 2.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .flagship-model .model-description {
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .other-models-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .other-models-title {
+            text-align: center;
+            font-size: 1.75rem;
+            color: var(--text-dark);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .other-models-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(46, 125, 50, 0.3);
+            }
+            100% {
+                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-md);
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .flagship-model {
+                grid-column: 1;
+                padding: 2.5rem 2rem;
+            }
+
+            .flagship-model .model-icon {
+                width: 90px;
+                height: 90px;
+                font-size: 2.5rem;
+            }
+
+            .flagship-model .model-title {
+                font-size: 2rem;
+            }
+
+            .model-card {
+                margin: 0 0.5rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .model-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .content-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .flagship-model {
+                padding: 2rem 1.5rem;
+            }
+
+            .flagship-model .model-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.25rem;
+            }
+
+            .flagship-model .model-title {
+                font-size: 1.75rem;
+            }
+
+            .model-card {
+                margin: 0;
+                padding: 1.75rem 1.25rem;
+            }
+
+            .model-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.75rem;
+            }
+
+            .catalog-section {
+                margin: 2rem 0.5rem;
+                padding: 3rem 1rem;
+            }
+            
+            .catalog-btn {
+                padding: 0.875rem 1.75rem;
+                font-size: 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="dasmedhub-logo.png" alt="DAS MedHub Logo" class="logo">
+        </div>
+        <nav class="nav-links">
+            <a href="#models" class="nav-link">Models</a>
+            <a href="https://models.dasmedhub.com/" class="nav-link">Catalog</a>
+            <a href="#footer" class="nav-link">Contact</a>
+            <a href="https://www.dasmedhub.com/" class="nav-link">Visit Us</a>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-section">
+        <video class="video-background" autoplay muted loop playsinline>
+            <source src="chest.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Priority AI Health Models</h1>
+            <p class="hero-subtitle">Cutting-edge artificial intelligence for advanced healthcare diagnostics and personalized medicine</p>
+            
+            <div class="hero-cta">
+                <a href="#models" class="btn btn-primary">
+                    <i class="fas fa-microscope"></i> Explore Models
+                </a>
+                <a href="https://models.dasmedhub.com/" class="btn btn-secondary">
+                    <i class="fas fa-book-open"></i> Full Catalog
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content" id="models">
+        <div class="content-container">
+            <!-- Section Header -->
+            <div class="section-header fade-in">
+                <h2 class="section-title">Our AI Health Models</h2>
+                <p class="section-subtitle">Advanced machine learning models designed to revolutionize healthcare diagnostics and improve patient outcomes through precision medicine</p>
+            </div>
+
+            <!-- Models Grid -->
+            <div class="models-grid">
+                <!-- ChestExpert Model (Flagship) -->
+                <div class="model-card fade-in flagship-model">
+                    <div class="flagship-badge">Flagship Model</div>
+                    <div class="model-icon"><i class="fas fa-lungs"></i></div>
+                    <h3 class="model-title">ChestExpert</h3>
+                    <p class="model-description">Our flagship AI diagnostic system for detecting 14 chest abnormalities from X-ray images with radiologist-level accuracy. Trusted by healthcare professionals worldwide for its precision and reliability in chest disease diagnosis.</p>
+                    <div class="model-buttons">
+                        <button class="btn btn-primary" onclick="accessModel('chest')">
+                            <i class="fas fa-play-circle"></i> Access Flagship Model
+                        </button>
+                        <button class="btn btn-secondary" onclick="toggleAbout('chest-about')">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </button>
+                    </div>
+                    <div class="about-section" id="chest-about">
+                        <div class="about-content">
+                            <h4>ChestExpert Diagnostic System</h4>
+                            <p>ChestExpert is our premier AI diagnostic tool that analyzes chest X-rays to detect 14 different abnormalities including pneumonia, tuberculosis, pneumothorax, and cardiac abnormalities. Trained on over 100,000 chest X-rays and validated by expert radiologists, it provides instant, accurate diagnoses to support clinical decision-making in emergency and primary care settings.</p>
+                            <p>As our flagship model, ChestExpert represents the cutting edge of medical AI technology, with continuous updates and improvements based on the latest research and clinical feedback.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Models Section -->
+            <div class="other-models-section fade-in">
+                <h3 class="other-models-title">Additional Priority Models</h3>
+                <div class="models-grid">
+                    <!-- BioTrace Model -->
+                    <div class="model-card fade-in">
+                        <div class="model-icon"><i class="fas fa-dna"></i></div>
+                        <h3 class="model-title">BioTrace</h3>
+                        <p class="model-description">Advanced microbiome sample origin prediction using state-of-the-art machine learning algorithms for precision medicine.</p>
+                        <div class="model-buttons">
+                            <button class="btn btn-primary" onclick="accessModel('biotrace')">
+                                <i class="fas fa-play-circle"></i> Access Model
+                            </button>
+                            <button class="btn btn-secondary" onclick="toggleAbout('biotrace-about')">
+                                <i class="fas fa-info-circle"></i> Learn More
+                            </button>
+                        </div>
+                        <div class="about-section" id="biotrace-about">
+                            <div class="about-content">
+                                <h4>BioTrace Overview</h4>
+                                <p>BioTrace leverages advanced machine learning to predict microbiome sample origins with unprecedented accuracy. This model analyzes complex microbial communities to provide insights for personalized medicine, disease prevention, and therapeutic interventions. Key features include real-time analysis, multi-omics integration, and clinical-grade accuracy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Cancer Detection Model -->
+                    <div class="model-card fade-in">
+                        <div class="model-icon"><i class="fas fa-bullseye"></i></div>
+                        <h3 class="model-title">Multi-Cancer Detection</h3>
+                        <p class="model-description">Comprehensive detection system for 26 different cancer types using multiple imaging modalities and biomarker analysis.</p>
+                        <div class="model-buttons">
+                            <button class="btn btn-primary" onclick="accessModel('cancer')">
+                                <i class="fas fa-play-circle"></i> Access Model
+                            </button>
+                            <button class="btn btn-secondary" onclick="toggleAbout('cancer-about')">
+                                <i class="fas fa-info-circle"></i> Learn More
+                            </button>
+                        </div>
+                        <div class="about-section" id="cancer-about">
+                            <div class="about-content">
+                                <h4>Multi-Cancer Detection System</h4>
+                                <p>Our revolutionary multi-modal cancer detection system combines radiological imaging, pathology, and molecular data to identify 26 different cancer types with clinical-grade precision. The system integrates deep learning models trained on millions of samples, providing early detection capabilities and treatment recommendations for optimal patient outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catalog Section -->
+            <div class="catalog-section fade-in">
+                <div class="catalog-content">
+                    <h3 class="catalog-title">Discover More AI Health Models</h3>
+                    <a href="https://models.dasmedhub.com/" class="catalog-btn">
+                        <i class="fas fa-search"></i> Explore Full Model Catalog (11 Models)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <img src="dasmedhub-logo.png" alt="DAS MedHub Logo" class="footer-logo">
+            <div class="footer-links">
+                <a href="#models" class="footer-link">AI Models</a>
+                <a href="https://models.dasmedhub.com/" class="footer-link">Full Catalog</a>
+                <a href="https://www.dasmedhub.com/" class="footer-link">Visit Us</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="https://www.dasmedhub.com/" class="footer-link">Contact Us</a>
+            </div>
+            <p class="copyright">© 2025 DAS medhub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Model Viewer -->
+    <div class="model-viewer" id="modelViewer">
+        <div class="viewer-header">
+            <h2 id="viewerTitle">Model Access</h2>
+            <button class="close-btn" onclick="closeModel()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <iframe class="model-iframe" id="modelIframe" src="" title="AI Model Viewer"></iframe>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
+    <script>
+        // Secure model URLs
+        const modelUrls = {
+            biotrace: 'https://das-medhub.github.io/microbiome-sample-origin-predictor/',
+            cancer: 'https://sebukpor.github.io/multi-cancer-classification/',
+            chest: 'https://das-medhub.github.io/Chest-expert/'
+        };
+
+        const modelTitles = {
+            biotrace: 'BioTrace - Microbiome Sample Origin Predictor',
+            cancer: 'Multi-Cancer Detection - 26 Cancer Types',
+            chest: 'ChestExpert - 14 Chest Abnormalities Detection'
+        };
+
+        // DOM elements
+        const header = document.querySelector('.header');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const loader = document.getElementById('loader');
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Handle hash-based navigation
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && modelUrls[hash]) {
+                showModel(hash);
+            }
+        }
+
+        // Access model function
+        function accessModel(modelKey) {
+            window.location.hash = modelKey;
+            showModel(modelKey);
+        }
+
+        // Show model in iframe
+        function showModel(modelKey) {
+            const viewer = document.getElementById('modelViewer');
+            const iframe = document.getElementById('modelIframe');
+            const title = document.getElementById('viewerTitle');
+            
+            if (modelUrls[modelKey]) {
+                // Show loader
+                loader.classList.add('active');
+                
+                // Set iframe source after a small delay to allow loader to show
+                setTimeout(() => {
+                    iframe.src = modelUrls[modelKey];
+                    title.textContent = modelTitles[modelKey];
+                    viewer.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Hide loader when iframe loads
+                    iframe.onload = function() {
+                        loader.classList.remove('active');
+                    };
+                }, 300);
+            }
+        }
+
+        // Close model viewer
+        function closeModel() {
+            const viewer = document.getElementById('modelViewer');
+            const iframe = document.getElementById('modelIframe');
+            
+            viewer.classList.remove('active');
+            setTimeout(() => {
+                iframe.src = '';
+                document.body.style.overflow = 'auto';
+                window.location.hash = '';
+            }, 300);
+        }
+
+        // Toggle about sections
+        function toggleAbout(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.about-section');
+            
+            // Close all other sections
+            allSections.forEach(s => {
+                if (s.id !== sectionId && s.classList.contains('active')) {
+                    s.classList.remove('active');
+                    
+                    // Scroll back to the card if needed
+                    const card = s.closest('.model-card');
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }
+            });
+            
+            // Toggle current section
+            section.classList.toggle('active');
+            
+            // Scroll to the expanded section if opening
+            if (section.classList.contains('active')) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 350);
+            }
+        }
+
+        // Toggle mobile menu
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Initialize
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModel();
+                
+                // Also close any open about sections
+                const allSections = document.querySelectorAll('.about-section');
+                allSections.forEach(s => s.classList.remove('active'));
+            }
+        });
+
+        // Close about sections when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.model-card') && !e.target.closest('.about-section')) {
+                const allSections = document.querySelectorAll('.about-section');
+                allSections.forEach(s => s.classList.remove('active'));
+            }
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Prevent video background from playing when model viewer is open
+        const videoBackground = document.querySelector('.video-background');
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                videoBackground.pause();
+            } else {
+                videoBackground.play();
+            }
+        });
+    </script>
+</body>
+</html>
