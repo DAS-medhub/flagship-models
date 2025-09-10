@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAS medhub - Priority AI Health Models</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --primary: #2e7d32;
             --primary-light: #4caf50;
@@ -35,7 +35,6 @@
             --radius-lg: 16px;
             --transition: all 0.3s ease;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -43,7 +42,6 @@
             background: var(--background);
             color: var(--text-dark);
         }
-
         /* Header */
         .header {
             position: fixed;
@@ -60,29 +58,25 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .header.scrolled {
             padding: 0.75rem 2rem;
             box-shadow: var(--shadow-md);
         }
-
         .logo-container {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
         .logo {
             height: 40px;
             width: auto;
             transition: var(--transition);
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
-
         .nav-link {
             text-decoration: none;
             color: var(--text-dark);
@@ -90,11 +84,9 @@
             transition: var(--transition);
             position: relative;
         }
-
         .nav-link:hover {
             color: var(--primary);
         }
-
         .nav-link::after {
             content: '';
             position: absolute;
@@ -105,11 +97,9 @@
             background: var(--primary);
             transition: var(--transition);
         }
-
         .nav-link:hover::after {
             width: 100%;
         }
-
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -118,7 +108,6 @@
             color: var(--text-dark);
             cursor: pointer;
         }
-
         /* Hero Section with Video Background */
         .hero-section {
             position: relative;
@@ -132,7 +121,6 @@
             overflow: hidden;
             padding: 0 1rem;
         }
-
         .video-background {
             position: absolute;
             top: 0;
@@ -142,7 +130,6 @@
             z-index: -2;
             object-fit: cover;
         }
-
         .video-overlay {
             position: absolute;
             top: 0;
@@ -152,7 +139,6 @@
             background: var(--gradient-overlay);
             z-index: -1;
         }
-
         .hero-content {
             max-width: 900px;
             padding: 2rem;
@@ -161,7 +147,6 @@
             backdrop-filter: blur(10px);
             animation: fadeInUp 1s ease-out;
         }
-
         .hero-title {
             font-size: 3.5rem;
             font-weight: 800;
@@ -169,7 +154,6 @@
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
             letter-spacing: -0.5px;
         }
-
         .hero-subtitle {
             font-size: 1.35rem;
             margin-bottom: 2.5rem;
@@ -177,14 +161,12 @@
             font-weight: 400;
             line-height: 1.6;
         }
-
         .hero-cta {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
@@ -194,25 +176,21 @@
             font-size: 2rem;
             animation: bounce 2s infinite;
         }
-
         /* Main Content Section */
         .main-content {
             background: linear-gradient(to bottom, var(--background), #ffffff);
             min-height: 100vh;
             padding: 5rem 0;
         }
-
         .content-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
-
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
         }
-
         .section-title {
             font-size: 2.75rem;
             font-weight: 700;
@@ -220,7 +198,6 @@
             margin-bottom: 1.25rem;
             position: relative;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -232,7 +209,6 @@
             background: var(--gradient-primary);
             border-radius: 2px;
         }
-
         .section-subtitle {
             font-size: 1.2rem;
             color: var(--text-light);
@@ -240,7 +216,6 @@
             margin: 0 auto;
             line-height: 1.7;
         }
-
         /* Model Cards Grid */
         .models-grid {
             display: grid;
@@ -248,7 +223,6 @@
             gap: 2.5rem;
             margin-bottom: 5rem;
         }
-
         .model-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
@@ -262,12 +236,10 @@
             flex-direction: column;
             height: 100%;
         }
-
         .model-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
         }
-
         .model-card::before {
             content: '';
             position: absolute;
@@ -279,11 +251,9 @@
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
-
         .model-card:hover::before {
             transform: scaleX(1);
         }
-
         .model-icon {
             width: 80px;
             height: 80px;
@@ -298,12 +268,10 @@
             transition: var(--transition);
             box-shadow: 0 8px 20px rgba(46, 125, 50, 0.25);
         }
-
         .model-card:hover .model-icon {
             transform: scale(1.1);
             background: var(--gradient-secondary);
         }
-
         .model-title {
             font-size: 1.75rem;
             font-weight: 700;
@@ -311,7 +279,6 @@
             margin-bottom: 1rem;
             text-align: center;
         }
-
         .model-description {
             color: var(--text-light);
             font-size: 1.05rem;
@@ -320,14 +287,12 @@
             line-height: 1.7;
             flex-grow: 1;
         }
-
         .model-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .btn {
             padding: 0.875rem 1.75rem;
             border: none;
@@ -344,7 +309,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn::before {
             content: '';
             position: absolute;
@@ -354,36 +318,31 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
+            pointer-events: none;
         }
-
         .btn:hover::before {
             left: 100%;
         }
-
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
             box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
         }
-
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
         }
-
         .btn-secondary {
             background: transparent;
             color: var(--secondary);
             border: 2px solid var(--secondary);
         }
-
         .btn-secondary:hover {
             background: var(--secondary);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(255, 111, 0, 0.3);
         }
-
         /* About Section */
         .about-section {
             max-height: 0;
@@ -392,30 +351,25 @@
             margin-top: 1.25rem;
             border-radius: var(--radius-sm);
         }
-
         .about-section.active {
             max-height: 500px;
             padding: 1.5rem;
             background: rgba(236, 239, 241, 0.5);
             border: 1px solid rgba(176, 190, 197, 0.3);
         }
-
         .about-content {
             color: var(--text-dark);
             line-height: 1.7;
         }
-
         .about-content h4 {
             color: var(--text-dark);
             margin-bottom: 0.75rem;
             font-size: 1.25rem;
             font-weight: 600;
         }
-
         .about-content p {
             margin-bottom: 1rem;
         }
-
         /* Catalog Section */
         .catalog-section {
             text-align: center;
@@ -426,7 +380,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .catalog-section::before {
             content: '';
             position: absolute;
@@ -437,19 +390,16 @@
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             transform: rotate(30deg);
         }
-
         .catalog-content {
             position: relative;
             z-index: 1;
         }
-
         .catalog-title {
             color: white;
             margin-bottom: 1.5rem;
             font-size: 1.75rem;
             font-weight: 600;
         }
-
         .catalog-btn {
             background: white;
             color: var(--primary);
@@ -466,12 +416,10 @@
             gap: 0.75rem;
             font-weight: 600;
         }
-
         .catalog-btn:hover {
             transform: translateY(-3px) scale(1.03);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-
         /* Model Viewer */
         .model-viewer {
             display: none;
@@ -486,12 +434,10 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
         .model-viewer.active {
             display: block;
             opacity: 1;
         }
-
         .viewer-header {
             position: fixed;
             top: 0;
@@ -506,7 +452,6 @@
             z-index: 2001;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-
         .close-btn {
             background: #d32f2f;
             color: white;
@@ -521,19 +466,16 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         .close-btn:hover {
             background: #b71c1c;
             transform: scale(1.05);
         }
-
         .model-iframe {
             width: 100%;
             height: 100%;
             border: none;
             padding-top: 80px;
         }
-
         /* Loading animation */
         .loader {
             display: none;
@@ -549,11 +491,9 @@
             border-top-color: var(--primary);
             animation: spin 1s ease-in-out infinite;
         }
-
         .loader.active {
             display: block;
         }
-
         /* Footer */
         .footer {
             background: var(--text-dark);
@@ -561,19 +501,16 @@
             padding: 3rem 0 2rem;
             text-align: center;
         }
-
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
-
         .footer-logo {
             height: 40px;
             margin-bottom: 1.5rem;
             opacity: 0.8;
         }
-
         .footer-links {
             display: flex;
             justify-content: center;
@@ -581,23 +518,89 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-
         .footer-link {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: var(--transition);
         }
-
         .footer-link:hover {
             color: white;
         }
-
         .copyright {
             color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
             margin-top: 2rem;
         }
-
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2500;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .auth-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        .auth-container {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .auth-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+        .auth-error, .auth-success {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            display: none;
+        }
+        .auth-error {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .auth-success {
+            background: #d1fae5;
+            color: #047857;
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #d1d5db;
+            color: var(--text-dark);
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .google-btn:hover {
+            background: #f3f4f6;
+        }
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -609,7 +612,6 @@
                 transform: translateY(0);
             }
         }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateX(-50%) translateY(0);
@@ -621,12 +623,10 @@
                 transform: translateX(-50%) translateY(-5px);
             }
         }
-
         @keyframes spin {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
-
         /* Flagship Model Styling */
         .flagship-model {
             grid-column: 1 / -1;
@@ -637,7 +637,6 @@
             box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
             animation: pulse 3s infinite;
         }
-
         .flagship-badge {
             position: absolute;
             top: -10px;
@@ -651,30 +650,25 @@
             box-shadow: 0 4px 10px rgba(255, 111, 0, 0.3);
             z-index: 10;
         }
-
         .flagship-model .model-icon {
             width: 100px;
             height: 100px;
             font-size: 2.75rem;
             box-shadow: 0 10px 25px rgba(46, 125, 50, 0.35);
         }
-
         .flagship-model .model-title {
             font-size: 2.25rem;
             margin-top: 0.5rem;
         }
-
         .flagship-model .model-description {
             font-size: 1.15rem;
             margin-bottom: 2.5rem;
         }
-
         .other-models-section {
             margin-top: 4rem;
             padding-top: 3rem;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         .other-models-title {
             text-align: center;
             font-size: 1.75rem;
@@ -682,7 +676,6 @@
             margin-bottom: 2.5rem;
             position: relative;
         }
-
         .other-models-title::after {
             content: '';
             position: absolute;
@@ -694,7 +687,6 @@
             background: var(--gradient-primary);
             border-radius: 2px;
         }
-
         @keyframes pulse {
             0% {
                 box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
@@ -706,27 +698,22 @@
                 box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
             }
         }
-
         /* Responsive Design */
         @media (max-width: 1024px) {
             .hero-title {
                 font-size: 3rem;
             }
-            
             .hero-subtitle {
                 font-size: 1.2rem;
             }
-            
             .section-title {
                 font-size: 2.5rem;
             }
         }
-
         @media (max-width: 768px) {
             .header {
                 padding: 1rem;
             }
-            
             .nav-links {
                 display: none;
                 position: absolute;
@@ -739,140 +726,154 @@
                 box-shadow: var(--shadow-md);
                 gap: 1rem;
             }
-            
             .nav-links.active {
                 display: flex;
             }
-            
             .mobile-menu-btn {
                 display: block;
             }
-            
             .hero-title {
                 font-size: 2.5rem;
             }
-
             .hero-subtitle {
                 font-size: 1.1rem;
                 padding: 0 1rem;
             }
-            
             .hero-content {
                 padding: 1.5rem;
             }
-            
             .hero-cta {
                 flex-direction: column;
                 align-items: center;
             }
-
             .section-title {
                 font-size: 2.2rem;
             }
-
             .models-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-
             .flagship-model {
                 grid-column: 1;
                 padding: 2.5rem 2rem;
             }
-
             .flagship-model .model-icon {
                 width: 90px;
                 height: 90px;
                 font-size: 2.5rem;
             }
-
             .flagship-model .model-title {
                 font-size: 2rem;
             }
-
             .model-card {
                 margin: 0 0.5rem;
                 padding: 2rem 1.5rem;
             }
-
             .model-buttons {
                 flex-direction: column;
                 gap: 1rem;
             }
-
             .btn {
                 width: 100%;
             }
-
             .content-container {
                 padding: 0 1rem;
             }
+            .auth-container {
+                max-width: 90%;
+            }
         }
-
         @media (max-width: 480px) {
             .hero-title {
                 font-size: 2rem;
             }
-
             .hero-subtitle {
                 font-size: 1rem;
             }
-
             .section-title {
                 font-size: 1.8rem;
             }
-
             .flagship-model {
                 padding: 2rem 1.5rem;
             }
-
             .flagship-model .model-icon {
                 width: 80px;
                 height: 80px;
                 font-size: 2.25rem;
             }
-
             .flagship-model .model-title {
                 font-size: 1.75rem;
             }
-
             .model-card {
                 margin: 0;
                 padding: 1.75rem 1.25rem;
             }
-
             .model-icon {
                 width: 70px;
                 height: 70px;
                 font-size: 1.75rem;
             }
-
             .catalog-section {
                 margin: 2rem 0.5rem;
                 padding: 3rem 1rem;
             }
-            
             .catalog-btn {
                 padding: 0.875rem 1.75rem;
                 font-size: 1rem;
             }
-            
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
             }
         }
-
         /* Scroll animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        /* Form styling improvements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        .password-container {
+            position: relative;
+        }
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
@@ -887,23 +888,105 @@
             <a href="https://models.dasmedhub.com/" class="nav-link">Catalog</a>
             <a href="#footer" class="nav-link">Contact</a>
             <a href="https://www.dasmedhub.com/" class="nav-link">Visit Us</a>
+            <button id="authBtn" class="btn btn-primary">Login / Sign Up</button>
+            <button id="logoutBtn" class="btn btn-secondary hidden">Logout</button>
         </nav>
         <button class="mobile-menu-btn" aria-label="Toggle menu">
             <i class="fas fa-bars"></i>
         </button>
     </header>
-
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <button class="auth-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="loginForm" class="auth-form">
+                <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="loginPassword" class="form-input" required>
+                        <button type="button" class="password-toggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button id="loginBtn" class="btn btn-primary w-full mb-4">Login</button>
+                <button id="googleLoginBtn" class="google-btn w-full mb-4">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <p class="text-center text-sm">
+                    <a href="#" id="forgotPasswordLink" class="text-primary hover:underline">Forgot Password?</a>
+                </p>
+                <p class="text-center text-sm mt-2">
+                    Don't have an account? <a href="#" id="showSignupLink" class="text-primary hover:underline">Sign Up</a>
+                </p>
+                <p id="loginError" class="auth-error"></p>
+                <p id="loginSuccess" class="auth-success"></p>
+            </div>
+            <div id="signupForm" class="auth-form hidden">
+                <h2 class="text-2xl font-bold text-center mb-6">Sign Up</h2>
+                <div class="form-group">
+                    <label class="form-label" for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signupPassword">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="signupPassword" class="form-input" required>
+                        <button type="button" class="password-toggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" class="form-input" required>
+                        <button type="button" class="password-toggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button id="signupBtn" class="btn btn-primary w-full mb-4">Sign Up</button>
+                <button id="googleSignupBtn" class="google-btn w-full mb-4">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <p class="text-center text-sm">
+                    Already have an account? <a href="#" id="showLoginLink" class="text-primary hover:underline">Login</a>
+                </p>
+                <p id="signupError" class="auth-error"></p>
+                <p id="signupSuccess" class="auth-success"></p>
+            </div>
+            <div id="forgotPasswordForm" class="auth-form hidden">
+                <h2 class="text-2xl font-bold text-center mb-6">Reset Password</h2>
+                <div class="form-group">
+                    <label class="form-label" for="resetEmail">Email</label>
+                    <input type="email" id="resetEmail" class="form-input" required>
+                </div>
+                <button id="resetPasswordBtn" class="btn btn-primary w-full mb-4">Send Reset Link</button>
+                <p class="text-center text-sm">
+                    Back to <a href="#" id="backToLoginLink" class="text-primary hover:underline">Login</a>
+                </p>
+                <p id="resetError" class="auth-error"></p>
+                <p id="resetSuccess" class="auth-success"></p>
+            </div>
+        </div>
+    </div>
     <!-- Hero Section with Video Background -->
     <section class="hero-section">
         <video class="video-background" autoplay muted loop playsinline>
             <source src="chestexpert.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
-        
         <div class="hero-content">
             <h1 class="hero-title">Priority AI Health Models</h1>
             <p class="hero-subtitle">Cutting-edge artificial intelligence for advanced healthcare diagnostics and personalized medicine</p>
-            
             <div class="hero-cta">
                 <a href="#models" class="btn btn-primary">
                     <i class="fas fa-microscope"></i> Explore Models
@@ -913,12 +996,10 @@
                 </a>
             </div>
         </div>
-        
         <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
-
     <!-- Main Content -->
     <section class="main-content" id="models">
         <div class="content-container">
@@ -927,7 +1008,6 @@
                 <h2 class="section-title">Our AI Health Models</h2>
                 <p class="section-subtitle">Advanced machine learning models designed to revolutionize healthcare diagnostics and improve patient outcomes through precision medicine</p>
             </div>
-
             <!-- Models Grid -->
             <div class="models-grid">
                 <!-- ChestExpert Model (Flagship) -->
@@ -937,10 +1017,10 @@
                     <h3 class="model-title">ChestExpert</h3>
                     <p class="model-description">Our flagship AI diagnostic system for detecting 14 chest abnormalities from X-ray images with radiologist-level accuracy. Trusted by healthcare professionals worldwide for its precision and reliability in chest disease diagnosis.</p>
                     <div class="model-buttons">
-                        <button class="btn btn-primary" onclick="accessModel('chest')">
+                        <button class="btn btn-primary" data-model="chest">
                             <i class="fas fa-play-circle"></i> Access Flagship Model
                         </button>
-                        <button class="btn btn-secondary" onclick="toggleAbout('chest-about')">
+                        <button class="btn btn-secondary" data-about="chest-about">
                             <i class="fas fa-info-circle"></i> Learn More
                         </button>
                     </div>
@@ -953,7 +1033,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Other Models Section -->
             <div class="other-models-section fade-in">
                 <h3 class="other-models-title">Additional Priority Models</h3>
@@ -964,10 +1043,10 @@
                         <h3 class="model-title">BioTrace</h3>
                         <p class="model-description">Advanced microbiome sample origin prediction using state-of-the-art machine learning algorithms for precision medicine.</p>
                         <div class="model-buttons">
-                            <button class="btn btn-primary" onclick="accessModel('biotrace')">
+                            <button class="btn btn-primary" data-model="biotrace">
                                 <i class="fas fa-play-circle"></i> Access Model
                             </button>
-                            <button class="btn btn-secondary" onclick="toggleAbout('biotrace-about')">
+                            <button class="btn btn-secondary" data-about="biotrace-about">
                                 <i class="fas fa-info-circle"></i> Learn More
                             </button>
                         </div>
@@ -978,17 +1057,16 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Multi-Cancer Detection Model -->
                     <div class="model-card fade-in">
                         <div class="model-icon"><i class="fas fa-bullseye"></i></div>
                         <h3 class="model-title">Multi-Cancer Detection</h3>
                         <p class="model-description">Comprehensive detection system for 26 different cancer types using multiple imaging modalities and biomarker analysis.</p>
                         <div class="model-buttons">
-                            <button class="btn btn-primary" onclick="accessModel('cancer')">
+                            <button class="btn btn-primary" data-model="cancer">
                                 <i class="fas fa-play-circle"></i> Access Model
                             </button>
-                            <button class="btn btn-secondary" onclick="toggleAbout('cancer-about')">
+                            <button class="btn btn-secondary" data-about="cancer-about">
                                 <i class="fas fa-info-circle"></i> Learn More
                             </button>
                         </div>
@@ -1001,7 +1079,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Catalog Section -->
             <div class="catalog-section fade-in">
                 <div class="catalog-content">
@@ -1013,7 +1090,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="footer-content">
@@ -1029,91 +1105,506 @@
             <p class="copyright">© 2025 DAS medhub. All rights reserved.</p>
         </div>
     </footer>
-
     <!-- Model Viewer -->
     <div class="model-viewer" id="modelViewer">
         <div class="viewer-header">
             <h2 id="viewerTitle">Model Access</h2>
-            <button class="close-btn" onclick="closeModel()">
+            <button class="close-btn" id="closeModelBtn">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
         <iframe class="model-iframe" id="modelIframe" src="" title="AI Model Viewer"></iframe>
     </div>
-
     <!-- Loader -->
     <div class="loader" id="loader"></div>
-
-    <script>
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB41z-9A3XWppkJcCcuWR9d45kpvtVD9MQ",
+            authDomain: "das-medhub-a060a.firebaseapp.com",
+            projectId: "das-medhub-a060a",
+            storageBucket: "das-medhub-a060a.firebasestorage.app",
+            messagingSenderId: "800341759371",
+            appId: "1:800341759371:web:8a98f822c63710f2f94b8e",
+            measurementId: "G-QD9587GWS5"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
         // Secure model URLs
         const modelUrls = {
             biotrace: 'https://das-medhub.github.io/microbiome-sample-origin-predictor/',
             cancer: 'https://sebukpor.github.io/multi-cancer-classification/',
             chest: 'https://das-medhub.github.io/Chest-expert/'
         };
-
         const modelTitles = {
             biotrace: 'BioTrace - Microbiome Sample Origin Predictor',
             cancer: 'Multi-Cancer Detection - 26 Cancer Types',
             chest: 'ChestExpert - 14 Chest Abnormalities Detection'
         };
-
         // DOM elements
         const header = document.querySelector('.header');
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         const loader = document.getElementById('loader');
+        const authModal = document.getElementById('authModal');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const signupError = document.getElementById('signupError');
+        const signupSuccess = document.getElementById('signupSuccess');
+        const resetError = document.getElementById('resetError');
+        const resetSuccess = document.getElementById('resetSuccess');
+        const authBtn = document.getElementById('authBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const authCloseBtn = document.querySelector('.auth-close-btn');
+        const closeModelBtn = document.getElementById('closeModelBtn');
+        
+        // Form buttons
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
+        const googleSignupBtn = document.getElementById('googleSignupBtn');
+        
+        // Navigation links
+        const showSignupLink = document.getElementById('showSignupLink');
+        const showLoginLink = document.getElementById('showLoginLink');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const backToLoginLink = document.getElementById('backToLoginLink');
+        
+        // Password toggles
+        const passwordToggles = document.querySelectorAll('.password-toggle');
+        
+        // Model access buttons
+        const modelAccessButtons = document.querySelectorAll('[data-model]');
+        const aboutButtons = document.querySelectorAll('[data-about]');
+        
+        let pendingModelKey = null;
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
+        // Initialize event listeners
+        function initEventListeners() {
+            // Header and navigation
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            authBtn.addEventListener('click', showAuthModal);
+            logoutBtn.addEventListener('click', logout);
+            authCloseBtn.addEventListener('click', closeAuthModal);
+            
+            // Auth form navigation
+            showSignupLink.addEventListener('click', showSignup);
+            showLoginLink.addEventListener('click', showLogin);
+            forgotPasswordLink.addEventListener('click', showForgotPassword);
+            backToLoginLink.addEventListener('click', showLogin);
+            
+            // Auth form actions
+            loginBtn.addEventListener('click', login);
+            signupBtn.addEventListener('click', signup);
+            resetPasswordBtn.addEventListener('click', resetPassword);
+            googleLoginBtn.addEventListener('click', signInWithGoogle);
+            googleSignupBtn.addEventListener('click', signInWithGoogle);
+            
+            // Password toggles
+            passwordToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    togglePasswordVisibility(input, this);
+                });
+            });
+            
+            // Model access buttons
+            modelAccessButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modelKey = this.getAttribute('data-model');
+                    checkAuth(modelKey);
+                });
+            });
+            
+            // About buttons
+            aboutButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const aboutId = this.getAttribute('data-about');
+                    toggleAbout(aboutId);
+                });
+            });
+            
+            // Model viewer
+            closeModelBtn.addEventListener('click', closeModel);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Close modals and about sections on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModel();
+                    closeAuthModal();
+                    const allSections = document.querySelectorAll('.about-section');
+                    allSections.forEach(s => s.classList.remove('active'));
                 }
             });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            
+            // Close about sections when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.model-card') && !e.target.closest('.about-section')) {
+                    const allSections = document.querySelectorAll('.about-section');
+                    allSections.forEach(s => s.classList.remove('active'));
                 }
             });
-        }, observerOptions);
-
-        // Observe fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Handle hash-based navigation
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1);
-            if (hash && modelUrls[hash]) {
-                showModel(hash);
-            }
+            
+            // Header background on scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Prevent video background from playing when model viewer is open
+            const videoBackground = document.querySelector('.video-background');
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    videoBackground.pause();
+                } else {
+                    videoBackground.play();
+                }
+            });
+            
+            // Form input validation
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    this.style.borderColor = '#d1d5db';
+                    const errorElement = this.closest('.auth-form').querySelector('.auth-error');
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Handle hash-based navigation
+            window.addEventListener('hashchange', handleHashChange);
+            window.addEventListener('load', handleHashChange);
         }
 
+        // Authentication functions
+        function showAuthModal() {
+            authModal.classList.add('active');
+            showLogin();
+        }
+        
+        function closeAuthModal() {
+            authModal.classList.remove('active');
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            forgotPasswordForm.classList.add('hidden');
+            clearMessages();
+        }
+        
+        function showLogin() {
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            forgotPasswordForm.classList.add('hidden');
+            clearMessages();
+        }
+        
+        function showSignup() {
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            forgotPasswordForm.classList.add('hidden');
+            clearMessages();
+        }
+        
+        function showForgotPassword() {
+            forgotPasswordForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            signupForm.classList.add('hidden');
+            clearMessages();
+        }
+        
+        function clearMessages() {
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            signupError.style.display = 'none';
+            signupSuccess.style.display = 'none';
+            resetError.style.display = 'none';
+            resetSuccess.style.display = 'none';
+        }
+        
+        function togglePasswordVisibility(input, toggle) {
+            const icon = toggle.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                loginError.textContent = 'Please enter both email and password';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            loader.classList.add('active');
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    loader.classList.remove('active');
+                    loginSuccess.textContent = 'Login successful! Redirecting...';
+                    loginSuccess.style.display = 'block';
+                    console.log('User logged in:', userCredential.user.email);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        if (pendingModelKey) {
+                            accessModel(pendingModelKey);
+                            pendingModelKey = null;
+                        }
+                    }, 1000);
+                })
+                .catch((error) => {
+                    loader.classList.remove('active');
+                    let errorMessage = 'An error occurred during login';
+                    switch (error.code) {
+                        case 'auth/invalid-email':
+                            errorMessage = 'Invalid email address format';
+                            break;
+                        case 'auth/user-disabled':
+                            errorMessage = 'This account has been disabled';
+                            break;
+                        case 'auth/user-not-found':
+                            errorMessage = 'No account found with this email';
+                            break;
+                        case 'auth/wrong-password':
+                            errorMessage = 'Incorrect password';
+                            break;
+                        default:
+                            errorMessage = error.message;
+                    }
+                    loginError.textContent = errorMessage;
+                    loginError.style.display = 'block';
+                    console.error('Login error:', error.message);
+                });
+        }
+        
+        function signup() {
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!email || !password || !confirmPassword) {
+                signupError.textContent = 'Please fill in all fields';
+                signupError.style.display = 'block';
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                signupError.textContent = 'Passwords do not match';
+                signupError.style.display = 'block';
+                console.error('Signup error: Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 6) {
+                signupError.textContent = 'Password should be at least 6 characters';
+                signupError.style.display = 'block';
+                return;
+            }
+            
+            loader.classList.add('active');
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    loader.classList.remove('active');
+                    signupSuccess.textContent = 'Sign up successful! Redirecting...';
+                    signupSuccess.style.display = 'block';
+                    console.log('User signed up:', userCredential.user.email);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        if (pendingModelKey) {
+                            accessModel(pendingModelKey);
+                            pendingModelKey = null;
+                        }
+                    }, 1000);
+                })
+                .catch((error) => {
+                    loader.classList.remove('active');
+                    let errorMessage = 'An error occurred during signup';
+                    switch (error.code) {
+                        case 'auth/email-already-in-use':
+                            errorMessage = 'This email is already registered';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage = 'Invalid email address format';
+                            break;
+                        case 'auth/operation-not-allowed':
+                            errorMessage = 'Account creation is currently disabled';
+                            break;
+                        case 'auth/weak-password':
+                            errorMessage = 'Password is too weak';
+                            break;
+                        default:
+                            errorMessage = error.message;
+                    }
+                    signupError.textContent = errorMessage;
+                    signupError.style.display = 'block';
+                    console.error('Signup error:', error.message);
+                });
+        }
+        
+        function signInWithGoogle() {
+            loader.classList.add('active');
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    loader.classList.remove('active');
+                    loginSuccess.textContent = 'Google sign-in successful! Redirecting...';
+                    loginSuccess.style.display = 'block';
+                    console.log('User signed in with Google:', result.user.email);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        if (pendingModelKey) {
+                            accessModel(pendingModelKey);
+                            pendingModelKey = null;
+                        }
+                    }, 1000);
+                })
+                .catch((error) => {
+                    loader.classList.remove('active');
+                    let errorMessage = 'An error occurred during Google sign-in';
+                    switch (error.code) {
+                        case 'auth/popup-closed-by-user':
+                            errorMessage = 'Sign-in popup was closed';
+                            break;
+                        case 'auth/cancelled-popup-request':
+                            errorMessage = 'Sign-in request was cancelled';
+                            break;
+                        default:
+                            errorMessage = error.message;
+                    }
+                    loginError.textContent = errorMessage;
+                    loginError.style.display = 'block';
+                    console.error('Google sign-in error:', error.message);
+                });
+        }
+        
+        function resetPassword() {
+            const email = document.getElementById('resetEmail').value;
+            
+            if (!email) {
+                resetError.textContent = 'Please enter your email address';
+                resetError.style.display = 'block';
+                return;
+            }
+            
+            loader.classList.add('active');
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    loader.classList.remove('active');
+                    resetSuccess.textContent = 'Password reset email sent! Check your inbox.';
+                    resetSuccess.style.display = 'block';
+                    console.log('Password reset email sent to:', email);
+                    setTimeout(() => {
+                        showLogin();
+                    }, 2000);
+                })
+                .catch((error) => {
+                    loader.classList.remove('active');
+                    let errorMessage = 'An error occurred while resetting password';
+                    switch (error.code) {
+                        case 'auth/invalid-email':
+                            errorMessage = 'Invalid email address format';
+                            break;
+                        case 'auth/user-not-found':
+                            errorMessage = 'No account found with this email';
+                            break;
+                        default:
+                            errorMessage = error.message;
+                    }
+                    resetError.textContent = errorMessage;
+                    resetError.style.display = 'block';
+                    console.error('Password reset error:', error.message);
+                });
+        }
+        
+        function logout() {
+            loader.classList.add('active');
+            signOut(auth)
+                .then(() => {
+                    loader.classList.remove('active');
+                    console.log('User logged out');
+                    updateAuthUI(null);
+                })
+                .catch((error) => {
+                    loader.classList.remove('active');
+                    console.error('Logout error:', error.message);
+                });
+        }
+        
+        function updateAuthUI(user) {
+            if (user) {
+                authBtn.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                console.log('Authenticated user:', user.email);
+            } else {
+                authBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+                console.log('No authenticated user');
+            }
+        }
+        
+        function checkAuth(modelKey) {
+            const user = auth.currentUser;
+            if (user) {
+                accessModel(modelKey);
+            } else {
+                pendingModelKey = modelKey;
+                showAuthModal();
+                loginError.textContent = 'Please log in to access the model';
+                loginError.style.display = 'block';
+                console.log('Authentication required for model:', modelKey);
+            }
+        }
+        
+        // Monitor auth state
+        onAuthStateChanged(auth, (user) => {
+            updateAuthUI(user);
+            if (user && pendingModelKey) {
+                accessModel(pendingModelKey);
+                pendingModelKey = null;
+            }
+        });
+        
         // Access model function
         function accessModel(modelKey) {
             window.location.hash = modelKey;
             showModel(modelKey);
         }
-
+        
         // Show model in iframe
         function showModel(modelKey) {
             const viewer = document.getElementById('modelViewer');
@@ -1121,24 +1612,23 @@
             const title = document.getElementById('viewerTitle');
             
             if (modelUrls[modelKey]) {
-                // Show loader
                 loader.classList.add('active');
-                
-                // Set iframe source after a small delay to allow loader to show
                 setTimeout(() => {
                     iframe.src = modelUrls[modelKey];
                     title.textContent = modelTitles[modelKey];
                     viewer.classList.add('active');
                     document.body.style.overflow = 'hidden';
                     
-                    // Hide loader when iframe loads
                     iframe.onload = function() {
                         loader.classList.remove('active');
+                        console.log(`Loaded model: ${modelTitles[modelKey]}`);
                     };
                 }, 300);
+            } else {
+                console.error('Invalid model key:', modelKey);
             }
         }
-
+        
         // Close model viewer
         function closeModel() {
             const viewer = document.getElementById('modelViewer');
@@ -1149,20 +1639,18 @@
                 iframe.src = '';
                 document.body.style.overflow = 'auto';
                 window.location.hash = '';
+                console.log('Model viewer closed');
             }, 300);
         }
-
+        
         // Toggle about sections
         function toggleAbout(sectionId) {
             const section = document.getElementById(sectionId);
             const allSections = document.querySelectorAll('.about-section');
             
-            // Close all other sections
             allSections.forEach(s => {
                 if (s.id !== sectionId && s.classList.contains('active')) {
                     s.classList.remove('active');
-                    
-                    // Scroll back to the card if needed
                     const card = s.closest('.model-card');
                     if (card) {
                         card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1170,65 +1658,61 @@
                 }
             });
             
-            // Toggle current section
             section.classList.toggle('active');
             
-            // Scroll to the expanded section if opening
             if (section.classList.contains('active')) {
                 setTimeout(() => {
                     section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    console.log(`Toggled about section: ${sectionId}`);
                 }, 350);
+            } else {
+                console.log(`Closed about section: ${sectionId}`);
             }
         }
-
+        
         // Toggle mobile menu
-        mobileMenuBtn.addEventListener('click', () => {
+        function toggleMobileMenu() {
             navLinks.classList.toggle('active');
-        });
-
-        // Initialize
-        window.addEventListener('hashchange', handleHashChange);
-        window.addEventListener('load', handleHashChange);
-
-        // Close modal on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModel();
-                
-                // Also close any open about sections
-                const allSections = document.querySelectorAll('.about-section');
-                allSections.forEach(s => s.classList.remove('active'));
+            console.log('Mobile menu toggled');
+        }
+        
+        // Handle hash-based navigation
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && modelUrls[hash]) {
+                checkAuth(hash);
             }
-        });
-
-        // Close about sections when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.model-card') && !e.target.closest('.about-section')) {
-                const allSections = document.querySelectorAll('.about-section');
-                allSections.forEach(s => s.classList.remove('active'));
-            }
-        });
-
-        // Header background on scroll
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Prevent video background from playing when model viewer is open
-        const videoBackground = document.querySelector('.video-background');
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                videoBackground.pause();
-            } else {
-                videoBackground.play();
-            }
-        });
+        }
+        
+        // Scroll animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Initialize the application
+        function initApp() {
+            initEventListeners();
+            initScrollAnimations();
+            console.log('DAS MedHub application initialized');
+        }
+        
+        // Start the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-
 </html>
-
