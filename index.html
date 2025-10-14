@@ -226,7 +226,7 @@
         .model-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
-            padding: 2.5rem 2rem;
+            padding: 0 2rem 2.5rem;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
             position: relative;
@@ -253,6 +253,14 @@
         }
         .model-card:hover::before {
             transform: scaleX(1);
+        }
+        .model-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
         }
         .model-icon {
             width: 80px;
@@ -627,43 +635,6 @@
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
-        /* Flagship Model Styling */
-        .flagship-model {
-            grid-column: 1 / -1;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 3rem 2.5rem;
-            border: 2px solid var(--primary-light);
-            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
-            animation: pulse 3s infinite;
-        }
-        .flagship-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: var(--gradient-secondary);
-            color: white;
-            padding: 0.5rem 1.25rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            box-shadow: 0 4px 10px rgba(255, 111, 0, 0.3);
-            z-index: 10;
-        }
-        .flagship-model .model-icon {
-            width: 100px;
-            height: 100px;
-            font-size: 2.75rem;
-            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.35);
-        }
-        .flagship-model .model-title {
-            font-size: 2.25rem;
-            margin-top: 0.5rem;
-        }
-        .flagship-model .model-description {
-            font-size: 1.15rem;
-            margin-bottom: 2.5rem;
-        }
         .other-models-section {
             margin-top: 4rem;
             padding-top: 3rem;
@@ -686,17 +657,6 @@
             height: 3px;
             background: var(--gradient-primary);
             border-radius: 2px;
-        }
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
-            }
-            50% {
-                box-shadow: 0 10px 40px rgba(46, 125, 50, 0.3);
-            }
-            100% {
-                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
-            }
         }
         /* Responsive Design */
         @media (max-width: 1024px) {
@@ -753,21 +713,9 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            .flagship-model {
-                grid-column: 1;
-                padding: 2.5rem 2rem;
-            }
-            .flagship-model .model-icon {
-                width: 90px;
-                height: 90px;
-                font-size: 2.5rem;
-            }
-            .flagship-model .model-title {
-                font-size: 2rem;
-            }
             .model-card {
                 margin: 0 0.5rem;
-                padding: 2rem 1.5rem;
+                padding: 0 1.5rem 2rem;
             }
             .model-buttons {
                 flex-direction: column;
@@ -793,20 +741,9 @@
             .section-title {
                 font-size: 1.8rem;
             }
-            .flagship-model {
-                padding: 2rem 1.5rem;
-            }
-            .flagship-model .model-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2.25rem;
-            }
-            .flagship-model .model-title {
-                font-size: 1.75rem;
-            }
             .model-card {
                 margin: 0;
-                padding: 1.75rem 1.25rem;
+                padding: 0 1.25rem 1.75rem;
             }
             .model-icon {
                 width: 70px;
@@ -1010,9 +947,9 @@
             </div>
             <!-- Models Grid -->
             <div class="models-grid">
-                <!-- ChestExpert Model (Flagship) -->
-                <div class="model-card fade-in flagship-model">
-                    <div class="flagship-badge">Flagship Model</div>
+                <!-- ChestExpert Model -->
+                <div class="model-card fade-in">
+                    <img src="images/chest.jpg" alt="ChestExpert" class="model-image">
                     <div class="model-icon"><i class="fas fa-lungs"></i></div>
                     <h3 class="model-title">ChestExpert</h3>
                     <p class="model-description">Our flagship AI diagnostic system for detecting 14 chest abnormalities from X-ray images with radiologist-level accuracy. Trusted by healthcare professionals worldwide for its precision and reliability in chest disease diagnosis.</p>
@@ -1032,6 +969,28 @@
                         </div>
                     </div>
                 </div>
+                <!-- Triage Avatar Model -->
+                <div class="model-card fade-in">
+                    <img src="images/rose.png" alt="Triage Avatar" class="model-image">
+                    <div class="model-icon"><i class="fas fa-user-md"></i></div>
+                    <h3 class="model-title">Triage Avatar</h3>
+                    <p class="model-description">A trained avatar that triages patients giving them right recommendation on whether to have a consultation with a doctor, get drug from a pharmacy or visit a hospital as well providing the patients the right first aid guidance depending on the severity of their ailment.</p>
+                    <div class="model-buttons">
+                        <button class="btn btn-primary" data-model="triage">
+                            <i class="fas fa-play-circle"></i> Access Model
+                        </button>
+                        <button class="btn btn-secondary" data-about="triage-about">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </button>
+                    </div>
+                    <div class="about-section" id="triage-about">
+                        <div class="about-content">
+                            <h4>Triage Avatar Assistant</h4>
+                            <p>The Triage Avatar is an AI-powered virtual assistant that evaluates patient symptoms in real-time, providing personalized recommendations for care. It determines the appropriate level of medical attention—whether a doctor's consultation, pharmacy visit, or hospital emergency—and delivers immediate first aid instructions tailored to the condition's severity.</p>
+                            <p>Designed for accessibility, it supports multiple languages and integrates seamlessly with telehealth platforms to streamline patient triage and improve healthcare efficiency.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Other Models Section -->
             <div class="other-models-section fade-in">
@@ -1039,6 +998,7 @@
                 <div class="models-grid">
                     <!-- BioTrace Model -->
                     <div class="model-card fade-in">
+                        <img src="images/microbiome.png" alt="BioTrace" class="model-image">
                         <div class="model-icon"><i class="fas fa-dna"></i></div>
                         <h3 class="model-title">BioTrace</h3>
                         <p class="model-description">Advanced microbiome sample origin prediction using state-of-the-art machine learning algorithms for precision medicine.</p>
@@ -1059,6 +1019,7 @@
                     </div>
                     <!-- Multi-Cancer Detection Model -->
                     <div class="model-card fade-in">
+                        <img src="images/lung_aca.jpg" alt="Multi-Cancer Detection" class="model-image">
                         <div class="model-icon"><i class="fas fa-bullseye"></i></div>
                         <h3 class="model-title">Multi-Cancer Detection</h3>
                         <p class="model-description">Comprehensive detection system for 26 different cancer types using multiple imaging modalities and biomarker analysis.</p>
@@ -1141,12 +1102,14 @@
         const modelUrls = {
             biotrace: 'https://das-medhub.github.io/microbiome-sample-origin-predictor/',
             cancer: 'https://sebukpor.github.io/multi-cancer-classification/',
-            chest: 'https://das-medhub.github.io/Chest-expert/'
+            chest: 'https://das-medhub.github.io/Chest-expert/',
+            triage: 'https://site.dasmedhub.com/avatar.html'
         };
         const modelTitles = {
             biotrace: 'BioTrace - Microbiome Sample Origin Predictor',
             cancer: 'Multi-Cancer Detection - 26 Cancer Types',
-            chest: 'ChestExpert - 14 Chest Abnormalities Detection'
+            chest: 'ChestExpert - 14 Chest Abnormalities Detection',
+            triage: 'Triage Avatar - Intelligent Patient Triage'
         };
         // DOM elements
         const header = document.querySelector('.header');
@@ -1716,4 +1679,3 @@
     </script>
 </body>
 </html>
-
