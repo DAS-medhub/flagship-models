@@ -139,7 +139,7 @@
             overflow: hidden;
             padding: 0 1rem;
             background: var(--gradient-primary);
-            margin-top: 25px;
+            margin-top: 30px;
         }
         
         .hero-content {
@@ -249,79 +249,27 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            height: 510px; 
+            gap: 1rem; 
         }
         
         /* Video Container */
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    /* Remove the fixed height */
-    /* height: 410px; */
-    /* Use padding-top to create a 16:9 aspect ratio */
-    padding-top: 56.25%; /* 9/16 = 0.5625 = 56.25% */
-    border-radius: 10px;
-    overflow: hidden;
-    /*box-shadow: var(--shadow-lg);*/
-    margin-top: 120px;
-}
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 120px;
+        }
 
-.featured-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 10px;
-    /* Keep object-fit: cover; to ensure the video fills the container */
-    object-fit: cover;
-}
-        
-        .video-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .video-btn {
-            padding: 0.75rem 1.5rem;
+        .featured-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
             border: none;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
-        }
-        
-        .video-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
-        }
-        
-        .video-btn.secondary {
-            background: transparent;
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
-        }
-        
-        .video-btn.secondary:hover {
-            background: var(--secondary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 111, 0, 0.3);
         }
         
         /* Model Cards Grid */
@@ -974,10 +922,9 @@
             justify-content: center;
         }
         
-        .video-fullscreen video {
+        .video-fullscreen iframe {
             width: 100%;
             height: 100%;
-            object-fit: contain;
         }
         
         .video-fullscreen-close {
@@ -1428,23 +1375,17 @@
                 <!-- Video Container -->
                 <div class="video-container">
                     <div class="video-wrapper">
-                        <video class="featured-video" id="featuredVideo" muted preload="metadata">
-                            <source src="chest.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                        <!-- YouTube Video Iframe -->
+                        <iframe class="featured-video" 
+                                src="https://www.youtube.com/embed/N9Ho2tY26wE" 
+                                title="ChestExpert" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                        </iframe>
                         <button class="video-fullscreen-btn" id="videoFullscreenBtn">
                             <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                    <div class="video-controls">
-                        <button class="video-btn" id="playBtn">
-                            <i class="fas fa-play"></i> Play
-                        </button>
-                        <button class="video-btn" id="pauseBtn">
-                            <i class="fas fa-pause"></i> Pause
-                        </button>
-                        <button class="video-btn secondary" id="muteBtn">
-                            <i class="fas fa-volume-up"></i> Unmute
                         </button>
                     </div>
                 </div>
@@ -1586,10 +1527,14 @@
 
     <!-- Video Fullscreen Overlay -->
     <div class="video-fullscreen hidden" id="videoFullscreen">
-        <video class="featured-video" id="fullscreenVideo" muted controls>
-            <source src="chest.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <iframe class="featured-video" 
+                src="https://www.youtube.com/embed/N9Ho2tY26wE" 
+                title="ChestExpert" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+        </iframe>
         <button class="video-fullscreen-close" id="videoFullscreenClose">
             <i class="fas fa-times"></i>
         </button>
@@ -1668,13 +1613,8 @@
         const fullscreenBtn = document.getElementById('fullscreenBtn');
         
         // Video elements
-        const featuredVideo = document.getElementById('featuredVideo');
-        const playBtn = document.getElementById('playBtn');
-        const pauseBtn = document.getElementById('pauseBtn');
-        const muteBtn = document.getElementById('muteBtn');
         const videoFullscreenBtn = document.getElementById('videoFullscreenBtn');
         const videoFullscreen = document.getElementById('videoFullscreen');
-        const fullscreenVideo = document.getElementById('fullscreenVideo');
         const videoFullscreenClose = document.getElementById('videoFullscreenClose');
         
         // Form buttons
@@ -1708,9 +1648,6 @@
             authCloseBtn.addEventListener('click', closeAuthModal);
             
             // Video controls
-            playBtn.addEventListener('click', playVideo);
-            pauseBtn.addEventListener('click', pauseVideo);
-            muteBtn.addEventListener('click', toggleMute);
             videoFullscreenBtn.addEventListener('click', openVideoFullscreen);
             videoFullscreenClose.addEventListener('click', closeVideoFullscreen);
             
@@ -1815,40 +1752,14 @@
         }
 
         // Video control functions
-        function playVideo() {
-            featuredVideo.play();
-            playBtn.style.display = 'none';
-            pauseBtn.style.display = 'inline-flex';
-        }
-        
-        function pauseVideo() {
-            featuredVideo.pause();
-            playBtn.style.display = 'inline-flex';
-            pauseBtn.style.display = 'none';
-        }
-        
-        function toggleMute() {
-            if (featuredVideo.muted) {
-                featuredVideo.muted = false;
-                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i> Mute';
-            } else {
-                featuredVideo.muted = true;
-                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i> Unmute';
-            }
-        }
-        
         function openVideoFullscreen() {
             videoFullscreen.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            fullscreenVideo.currentTime = featuredVideo.currentTime;
-            fullscreenVideo.play();
         }
         
         function closeVideoFullscreen() {
             videoFullscreen.classList.add('hidden');
             document.body.style.overflow = 'auto';
-            featuredVideo.currentTime = fullscreenVideo.currentTime;
-            fullscreenVideo.pause();
         }
 
         // Authentication functions
@@ -2292,4 +2203,3 @@
     </script>
 </body>
 </html>
-
